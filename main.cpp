@@ -36,22 +36,6 @@ extern "C" {
 //SCE
 int _newlib_heap_size_user = 16 * 1024 * 1024;
 unsigned int sceLibcHeapSize = 16 * 1024 * 1024;
-
-void init_module() {
-    sceKernelLoadStartModule("vs0:sys/external/libfios2.suprx", 0, nullptr, 0, nullptr, nullptr);
-    sceKernelLoadStartModule("vs0:sys/external/libc.suprx", 0, nullptr, 0, nullptr, nullptr);
-    sceKernelLoadStartModule("app0:module/libGL.suprx", 0, nullptr, 0, nullptr, nullptr);
-    sceKernelLoadStartModule("app0:module/libgpu_es4_ext.suprx", 0, nullptr, 0, nullptr, nullptr);
-    sceKernelLoadStartModule("app0:module/libIMGEGL.suprx", 0, nullptr, 0, nullptr, nullptr);
-    // don't know why but it's needed
-    sceKernelLoadStartModule("app0:module/libGLESv1_CM.suprx", 0, nullptr, 0, nullptr, nullptr);
-//    sceKernelLoadStartModule("app0:module/libGLESv2.suprx", 0, nullptr, 0, nullptr, nullptr);
-//    sceKernelLoadStartModule("app0:module/libpvrPSP2_WSEGL.suprx", 0, nullptr, 0, nullptr, nullptr);
-
-    PVRSRV_PSP2_APPHINT hint;
-    PVRSRVInitializeAppHint(&hint);
-    PVRSRVCreateVirtualAppHint(&hint);
-}
 #endif
 
 #define log(...) printf(__VA_ARGS__); fflush(stdout)
@@ -306,9 +290,6 @@ static int lookup_all_glsyms() {
 
 int main(int argc, char **argv) {
 #if defined(__VITA__)
-    // load kernel module
-    init_module();
-
     // force desktop GL
     SDL_setenv("VITA_PVR_OGL", "1", 1);
 #endif

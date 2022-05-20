@@ -26,5 +26,6 @@ make
 
 - SonicMastr for porting gl4es
 - GrapheneCt, Bythos, and Jaylon Gowie for developing PVR_PSP2
+- isage for pointing out the GLES module conficting issue
 - Brian Paul for gear example
 - [nxengine-evo](https://github.com/nxengine/nxengine-evo) for CMakeList example
